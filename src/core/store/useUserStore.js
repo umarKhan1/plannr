@@ -9,6 +9,7 @@ export const useUserStore = create((set) => ({
     hasSeenOnboarding: false,
     currentSlideIndex: 0,
     userLocation: null, // Global location storage
+    userCategories: [], // Global categories storage
 
     // Auth UI State (Global)
     isLoading: false,
@@ -50,4 +51,5 @@ export const useUserStore = create((set) => ({
     completeOnboarding: () => set({ hasSeenOnboarding: true }),
     setCurrentSlideIndex: (index) => set({ currentSlideIndex: index }),
     setUserLocation: (location) => set({ userLocation: location }),
+    setUserCategories: (categories) => set({ userCategories: categories }),
 }));

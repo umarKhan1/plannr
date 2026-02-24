@@ -40,6 +40,11 @@ export default function AppNavigator() {
                     component={require('../../features/map/presentation/screens/LocationPickerScreen').default}
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="CategorySelection"
+                    component={require('../../features/categories/presentation/screens/CategorySelectionScreen').default}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

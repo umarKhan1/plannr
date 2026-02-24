@@ -47,7 +47,7 @@ export const useLocationPicker = (navigation) => {
 
         navigation.reset({
             index: 0,
-            routes: [{ name: 'Home' }],
+            routes: [{ name: 'CategorySelection' }],
         });
     };
 
