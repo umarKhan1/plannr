@@ -7,6 +7,8 @@ import LoginScreen from '../../features/auth/presentation/screens/LoginScreen';
 import SignUpScreen from '../../features/auth/presentation/screens/SignUpScreen';
 import { useUserStore } from '../store/useUserStore';
 
+import MainTabNavigator from './MainTabNavigator';
+
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
@@ -32,7 +34,7 @@ export default function AppNavigator() {
                 />
                 <Stack.Screen
                     name="Home"
-                    component={HomeScreen}
+                    component={MainTabNavigator}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
@@ -43,6 +45,26 @@ export default function AppNavigator() {
                 <Stack.Screen
                     name="CategorySelection"
                     component={require('../../features/categories/presentation/screens/CategorySelectionScreen').default}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Search"
+                    component={require('../../features/search/presentation/screens/SearchScreen').default}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="EventDetails"
+                    component={require('../../features/events/presentation/screens/EventDetailsScreen').default}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="OrderDetail"
+                    component={require('../../features/events/presentation/screens/OrderDetailScreen').default}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="EventGoogleMap"
+                    component={require('../../features/map/presentation/screens/GoogleMapScreen').default}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

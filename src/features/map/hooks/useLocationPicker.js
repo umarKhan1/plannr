@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as Location from 'expo-location';
 import { useUserStore } from '../../../core/store/useUserStore';
 
-export const useLocationPicker = (navigation) => {
+export const useLocationPicker = (navigation, isFromHome = false) => {
     // Local State
     const [location, setLocation] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,10 +45,14 @@ export const useLocationPicker = (navigation) => {
             setUserLocation(location);
         }
 
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'CategorySelection' }],
-        });
+        if (isFromHome) {
+            navigation.goBack();
+        } else {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'CategorySelection' }],
+            });
+        }
     };
 
     const handleSearchSelect = (data, details = null) => {

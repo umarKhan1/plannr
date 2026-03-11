@@ -51,7 +51,8 @@ export default {
                 {
                     "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
                 }
-            ]
+            ],
+            "react-native-bottom-tabs"
         ]
     }
 };

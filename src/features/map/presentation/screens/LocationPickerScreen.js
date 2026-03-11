@@ -8,7 +8,9 @@ import { LocationMapView } from '../components/LocationMapView';
 import { MapSearchBox } from '../components/MapSearchBox';
 import { AppColors } from '../../../../shared/theme/colors';
 
-export default function LocationPickerScreen({ navigation }) {
+export default function LocationPickerScreen({ navigation, route }) {
+    const isFromHome = route.params?.fromHome || false;
+
     const {
         location,
         isLoading,
@@ -17,7 +19,7 @@ export default function LocationPickerScreen({ navigation }) {
         handleSearchSelect,
         handleMyLocation,
         handleRegionChangeComplete,
-    } = useLocationPicker(navigation);
+    } = useLocationPicker(navigation, isFromHome);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -42,7 +44,7 @@ export default function LocationPickerScreen({ navigation }) {
                 </TouchableOpacity>
 
                 <PrimaryButton
-                    text="ADD"
+                    text={isFromHome ? "UPDATE" : "ADD"}
                     onPress={handleConfirmLocation}
 
                 />

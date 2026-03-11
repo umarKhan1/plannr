@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import * as Location from 'expo-location';
 import { useUserStore } from '../../../core/store/useUserStore';
 import { isValidEmail } from '../../../core/utils/validation';
 
@@ -7,6 +8,7 @@ export const useLogin = (navigation) => {
     const login = useUserStore((state) => state.login);
     const isLoading = useUserStore((state) => state.isLoading);
     const globalError = useUserStore((state) => state.error);
+    const setUserLocation = useUserStore((state) => state.setUserLocation);
 
     // Local Form State (Transient)
     const [email, setEmail] = useState('');
@@ -39,6 +41,22 @@ export const useLogin = (navigation) => {
 
         // 3. Handle Navigation on Success
         if (success) {
+            // Fetch and set user location automatically
+            try {
+                let { status } = await Location.requestForegroundPermissionsAsync();
+                if (status === 'granted') {
+                    let currentLocation = await Location.getCurrentPositionAsync({});
+                    setUserLocation({
+                        latitude: currentLocation.coords.latitude,
+                        longitude: currentLocation.coords.longitude,
+                        latitudeDelta: 0.005,
+                        longitudeDelta: 0.005,
+                    });
+                }
+            } catch (error) {
+                console.log("Could not fetch location during login", error);
+            }
+
             navigation.replace('Home');
         }
     };

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Platform, Text } from 'react-native';
+import { View, StyleSheet, Platform, Text, TouchableOpacity } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { CustomInput } from '../../../../shared/components/CustomInput';
 import { moderateScale, verticalScale } from '../../../../core/utils/responsive';
 import { AppColors } from '../../../../shared/theme/colors';
@@ -9,8 +10,22 @@ import { AppColors } from '../../../../shared/theme/colors';
 const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export const MapSearchBox = ({ onSearchSelect }) => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.searchContainer}>
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={styles.backButton}
+                activeOpacity={0.7}
+            >
+                <MaterialIcons
+                    name="arrow-back"
+                    size={28}
+                    color="#000"
+                />
+            </TouchableOpacity>
+
             <GooglePlacesAutocomplete
                 placeholder="Search new address..."
                 fetchDetails={true}
@@ -22,36 +37,25 @@ export const MapSearchBox = ({ onSearchSelect }) => {
                 textInputProps={{
                     InputComp: CustomInput,
                     containerStyle: { flex: 1, marginBottom: 0 },
-                    style: { borderWidth: 0, borderColor: 'transparent' }, // Overriding default border
                 }}
-                renderLeftButton={() => (
-                    <MaterialIcons
-                        name="search"
-                        size={28}
-                        color={AppColors.primary}
-                        style={{ alignSelf: 'center', marginLeft: 15 }}
-                    />
-                )}
                 styles={{
                     container: {
                         flex: 1,
                     },
                     textInputContainer: {
-                        backgroundColor: 'white',
-                        borderRadius: moderateScale(10), // match exact screenshot form shape
-                        shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 2 },
-                        shadowOpacity: 0.1,
-                        shadowRadius: 4,
-                        elevation: 4,
+                        backgroundColor: 'transparent',
                         paddingVertical: Platform.OS === 'ios' ? verticalScale(2) : 0,
                     },
                     textInput: {
-                        height: verticalScale(48), // decreasing height
+                        height: verticalScale(48),
                         color: '#000',
                         fontSize: moderateScale(16),
-                        paddingHorizontal: moderateScale(12),
-                        backgroundColor: 'transparent',
+                        paddingHorizontal: moderateScale(15),
+                        backgroundColor: 'white',
+                        borderRadius: moderateScale(10),
+                        borderWidth: 1,
+                        borderColor: '#E0E0E0',
+                        textAlign: 'center',
                     },
                     listView: {
                         backgroundColor: 'white',
@@ -103,7 +107,14 @@ const styles = StyleSheet.create({
         left: moderateScale(20),
         right: moderateScale(20),
         flexDirection: 'row',
+        alignItems: 'flex-start',
         zIndex: 1,
+    },
+    backButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: verticalScale(48), // matching text input height to align center
+        marginRight: moderateScale(15),
     },
     suggestionRow: {
         flexDirection: 'row',

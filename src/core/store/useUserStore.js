@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 // detailed comment: definition of the store helper function
 // This is your "Global State Container" (like a Cubit/Bloc provided globally)
-export const useUserStore = create((set) => ({
+export const useUserStore = create((set, get) => ({
     // State variables (like state fields in a Cubit)
     user: null, // null means not logged in
     isAuthenticated: false,
@@ -10,6 +10,7 @@ export const useUserStore = create((set) => ({
     currentSlideIndex: 0,
     userLocation: null, // Global location storage
     userCategories: [], // Global categories storage
+    joinedEvents: [],   // Array of { eventId, locationData }
 
     // Auth UI State (Global)
     isLoading: false,
@@ -52,4 +53,18 @@ export const useUserStore = create((set) => ({
     setCurrentSlideIndex: (index) => set({ currentSlideIndex: index }),
     setUserLocation: (location) => set({ userLocation: location }),
     setUserCategories: (categories) => set({ userCategories: categories }),
+
+    // Event Management
+    joinEvent: (eventId, locationData) => set((state) => {
+        // Prevent duplicate joins
+        if (state.joinedEvents.some(e => e.eventId === eventId)) {
+            return state;
+        }
+        return {
+            joinedEvents: [...state.joinedEvents, { eventId, locationData }]
+        };
+    }),
+    hasJoinedEvent: (eventId) => {
+        return get().joinedEvents.some(e => e.eventId === eventId);
+    }
 }));
