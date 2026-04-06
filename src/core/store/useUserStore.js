@@ -66,5 +66,19 @@ export const useUserStore = create((set, get) => ({
     }),
     hasJoinedEvent: (eventId) => {
         return get().joinedEvents.some(e => e.eventId === eventId);
+    },
+
+    // Favorites Management
+    favoriteEvents: [],
+    toggleFavorite: (eventId) => set((state) => {
+        const isFavorite = state.favoriteEvents.includes(eventId);
+        if (isFavorite) {
+            return { favoriteEvents: state.favoriteEvents.filter(id => id !== eventId) };
+        } else {
+            return { favoriteEvents: [...state.favoriteEvents, eventId] };
+        }
+    }),
+    hasFavorited: (eventId) => {
+        return get().favoriteEvents.includes(eventId);
     }
 }));

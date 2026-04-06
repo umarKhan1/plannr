@@ -67,6 +67,11 @@ export default function AppNavigator() {
                     component={require('../../features/map/presentation/screens/GoogleMapScreen').default}
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="TicketDetails"
+                    component={require('../../features/tickets/presentation/screens/TicketDetailsScreen').default}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

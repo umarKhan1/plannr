@@ -5,18 +5,14 @@ import { Feather } from '@expo/vector-icons';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 
 import HomeScreen from '../../features/home/presentation/screens/HomeScreen';
+import TicketsScreen from '../../features/tickets/presentation/screens/TicketsScreen';
 import { AppColors } from '../../shared/theme/colors';
 import { moderateScale, verticalScale } from '../utils/responsive';
 
 const { width } = Dimensions.get('window');
 
-// Inline Placeholder Screens
-const TicketScreen = () => (
-    <View style={styles.placeholderContainer}><Text style={styles.placeholderText}>Tickets Screen</Text></View>
-);
-const FavoritesScreen = () => (
-    <View style={styles.placeholderContainer}><Text style={styles.placeholderText}>Favorites Screen</Text></View>
-);
+import FavoritesScreen from '../../features/favorites/presentation/screens/FavoritesScreen';
+
 const MessagesScreen = () => (
     <View style={styles.placeholderContainer}><Text style={styles.placeholderText}>Messages Screen</Text></View>
 );
@@ -116,7 +112,7 @@ export default function MainTabNavigator() {
             tabBar={(props) => <LiquidTabBar {...props} />}
         >
             <Tab.Screen name="HomeTab" component={HomeScreen} />
-            <Tab.Screen name="TicketTab" component={TicketScreen} />
+            <Tab.Screen name="TicketTab" component={TicketsScreen} />
             <Tab.Screen name="FavoritesTab" component={FavoritesScreen} />
             <Tab.Screen name="MessagesTab" component={MessagesScreen} />
             <Tab.Screen name="ProfileTab" component={ProfileScreen} />

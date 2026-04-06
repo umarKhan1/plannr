@@ -92,7 +92,7 @@ export default function EventDetailsScreen() {
                 showsVerticalScrollIndicator={false}
                 bounces={false}
             >
-                <EventImageHeader imageUrl={localEventData.image} />
+                <EventImageHeader imageUrl={localEventData.image} eventId={eventId} />
 
                 <EventInfoTitleCard
                     title={localEventData.title}

@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 import { Feather } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { moderateScale, verticalScale } from '../../../../../core/utils/responsive';
+import { useUserStore } from '../../../../../core/store/useUserStore';
 
 const { width } = Dimensions.get('window');
 
-const EventImageHeader = ({ imageUrl }) => {
+const EventImageHeader = ({ imageUrl, eventId }) => {
     const navigation = useNavigation();
     const insets = useSafeAreaInsets();
-    const [isFavorite, setIsFavorite] = useState(false);
+    const isFavorite = useUserStore(state => state.hasFavorited(eventId));
+    const toggleFavorite = useUserStore(state => state.toggleFavorite);
 
     return (
         <View style={styles.container}>
@@ -35,7 +37,7 @@ const EventImageHeader = ({ imageUrl }) => {
                 {/* Favorite Button */}
                 <TouchableOpacity
                     style={styles.iconButton}
-                    onPress={() => setIsFavorite(!isFavorite)}
+                    onPress={() => toggleFavorite(eventId)}
                     hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                 >
                     <Feather

@@ -4,14 +4,16 @@ import { Image, ImageBackground } from 'expo-image';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { AppColors } from '../../../../shared/theme/colors';
 import { moderateScale, verticalScale } from '../../../../core/utils/responsive';
+import { useUserStore } from '../../../../core/store/useUserStore';
 
 // Taking props to make it reusable anywhere in the app
 // variant can be 'horizontal' (for search lists), 'vertical' (for carousels), or 'home' (for home feed)
 export function EventCard({ event, onPress, showHeart = true, variant = 'horizontal' }) {
-    const [isLiked, setIsLiked] = useState(false);
+    const isLiked = useUserStore(state => state.hasFavorited(event.id));
+    const toggleFavorite = useUserStore(state => state.toggleFavorite);
 
     const handleLikePress = () => {
-        setIsLiked(!isLiked);
+        toggleFavorite(event.id);
         // Here we would also fire an async request to Supabase in the future
     };
 
@@ -174,7 +176,13 @@ export function EventCard({ event, onPress, showHeart = true, variant = 'horizon
 
             {showHeart && (
                 <View style={styles.heartContainer}>
-                    {/* Heart icon will go here if needed in other screens */}
+                    <TouchableOpacity onPress={handleLikePress}>
+                        <MaterialCommunityIcons 
+                            name={isLiked ? "cards-heart" : "heart-outline"} 
+                            size={20} 
+                            color={isLiked ? AppColors.primary : '#8A8A8E'} 
+                        />
+                    </TouchableOpacity>
                 </View>
             )}
 
