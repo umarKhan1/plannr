@@ -19,7 +19,9 @@ export default {
             bundleIdentifier: "com.anonymous.logexpress",
             infoPlist: {
                 NSLocationWhenInUseUsageDescription: "This app needs your location to help you set the delivery or pickup address on the map.",
-                NSLocationAlwaysAndWhenInUseUsageDescription: "This app needs your location to track delivery progress."
+                NSLocationAlwaysAndWhenInUseUsageDescription: "This app needs your location to track delivery progress.",
+                NSPhotoLibraryUsageDescription: "Logeexpress needs access to your photo library to send images in chat.",
+                NSCameraUsageDescription: "Logeexpress needs access to your camera to take photos for chat."
             },
             config: {
                 googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY
@@ -50,6 +52,12 @@ export default {
                 "expo-location",
                 {
                     "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+                }
+            ],
+            [
+                "expo-image-picker",
+                {
+                    "photosPermission": "Logeexpress needs access to your photo library to send images in chat."
                 }
             ],
             "react-native-bottom-tabs"

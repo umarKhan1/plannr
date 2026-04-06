@@ -9,7 +9,7 @@ import { useUserStore } from '../../../../core/store/useUserStore';
 // Taking props to make it reusable anywhere in the app
 // variant can be 'horizontal' (for search lists), 'vertical' (for carousels), or 'home' (for home feed)
 export function EventCard({ event, onPress, showHeart = true, variant = 'horizontal' }) {
-    const isLiked = useUserStore(state => state.hasFavorited(event.id));
+    const isLiked = useUserStore(state => state.favoriteEvents.includes(event.id));
     const toggleFavorite = useUserStore(state => state.toggleFavorite);
 
     const handleLikePress = () => {

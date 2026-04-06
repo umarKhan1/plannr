@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
-// Correct relative paths from: src/features/favorites/presentation/screens/
+
 import { useFavoritesList } from '../../hooks/useFavoritesList';             // 2 up
 import TicketShimmer from '../../../tickets/presentation/components/TicketShimmer'; // 3 up -> features/tickets
 import EmptyTicketState from '../../../tickets/presentation/components/EmptyTicketState'; // 3 up
@@ -19,7 +19,7 @@ const SCREEN_BG = '#F7F7F7';
 
 const FavoriteEventCard = ({ event }) => {
     const navigation = useNavigation();
-    const isLiked = useUserStore(state => state.hasFavorited(event.id));
+    const isLiked = useUserStore(state => state.favoriteEvents.includes(event.id));
     const toggleFavorite = useUserStore(state => state.toggleFavorite);
 
     const locationName = typeof event.location === 'string'

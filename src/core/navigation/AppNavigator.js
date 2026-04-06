@@ -72,6 +72,11 @@ export default function AppNavigator() {
                     component={require('../../features/tickets/presentation/screens/TicketDetailsScreen').default}
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="ChatDetail"
+                    component={require('../../features/messages/presentation/screens/ChatDetailScreen').default}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -12,7 +12,7 @@ const { width } = Dimensions.get('window');
 const EventImageHeader = ({ imageUrl, eventId }) => {
     const navigation = useNavigation();
     const insets = useSafeAreaInsets();
-    const isFavorite = useUserStore(state => state.hasFavorited(eventId));
+    const isFavorite = useUserStore(state => state.favoriteEvents.includes(eventId));
     const toggleFavorite = useUserStore(state => state.toggleFavorite);
 
     return (

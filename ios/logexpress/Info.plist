@@ -52,6 +52,10 @@
     <string>Allow $(PRODUCT_NAME) to access your location</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>This app needs your location to help you set the delivery or pickup address on the map.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Logeexpress needs access to your photo library to send images in chat.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Logeexpress needs access to your camera to take photos for chat.</string>
     <key>RCTNewArchEnabled</key>
     <true/>
     <key>UILaunchStoryboardName</key>

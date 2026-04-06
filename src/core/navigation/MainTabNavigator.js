@@ -12,10 +12,8 @@ import { moderateScale, verticalScale } from '../utils/responsive';
 const { width } = Dimensions.get('window');
 
 import FavoritesScreen from '../../features/favorites/presentation/screens/FavoritesScreen';
+import MessagesScreen from '../../features/messages/presentation/screens/MessagesScreen';
 
-const MessagesScreen = () => (
-    <View style={styles.placeholderContainer}><Text style={styles.placeholderText}>Messages Screen</Text></View>
-);
 const ProfileScreen = () => (
     <View style={styles.placeholderContainer}><Text style={styles.placeholderText}>Profile Screen</Text></View>
 );
