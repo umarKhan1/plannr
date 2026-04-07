@@ -60,7 +60,8 @@ export default {
                     "photosPermission": "Logeexpress needs access to your photo library to send images in chat."
                 }
             ],
-            "react-native-bottom-tabs"
+            "react-native-bottom-tabs",
+            "@react-native-community/datetimepicker"
         ]
     }
 };

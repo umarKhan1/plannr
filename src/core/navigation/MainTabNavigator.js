@@ -13,10 +13,7 @@ const { width } = Dimensions.get('window');
 
 import FavoritesScreen from '../../features/favorites/presentation/screens/FavoritesScreen';
 import MessagesScreen from '../../features/messages/presentation/screens/MessagesScreen';
-
-const ProfileScreen = () => (
-    <View style={styles.placeholderContainer}><Text style={styles.placeholderText}>Profile Screen</Text></View>
-);
+import ProfileScreen from '../../features/profile/presentation/screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -119,17 +116,7 @@ export default function MainTabNavigator() {
 }
 
 const styles = StyleSheet.create({
-    placeholderContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FFFFFF',
-    },
-    placeholderText: {
-        fontSize: moderateScale(18),
-        fontWeight: 'bold',
-        color: '#333333',
-    },
+
     absoluteContainer: {
         position: 'absolute',
         bottom: 0,

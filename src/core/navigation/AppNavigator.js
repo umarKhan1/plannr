@@ -77,6 +77,16 @@ export default function AppNavigator() {
                     component={require('../../features/messages/presentation/screens/ChatDetailScreen').default}
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="EditProfile"
+                    component={require('../../features/profile/presentation/screens/EditProfileScreen').default}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="CreateEvent"
+                    component={require('../../features/events/presentation/screens/CreateEventScreen').default}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
