@@ -1,14 +1,14 @@
 # Planner - Premium Event Discovery & Tracking
 
 Planner is a high-performance event discovery application built with React Native and Expo. It transforms how users discover, join, and manage events through a modern, card-based interface, interactive mapping, and real-time community engagement.
-
+![Main Intro](assets/screenshots/mainintro.png)
 ## Visual Experience
 
 ### 1. Welcome & Onboarding
 Planner greets users with a sleek, vibrant onboarding experience that sets the tone for a premium event-tracking journey.
 
 ![Onboarding](assets/screenshots/splash&onboarding.png)
-![Main Intro](assets/screenshots/mainintro.png)
+
 
 ### 2. Secure Authentication
 Seamless login and signup flows powered by Supabase Auth, ensuring user data is secure from the first step.
