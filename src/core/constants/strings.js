@@ -1,5 +1,5 @@
 export const AppStrings = {
-  appName: 'LogExpress',
+  appName: 'Planner',
   welcomeStart: 'Welcome to',
   homeTitle: 'Home Screen',
   // Add more strings here

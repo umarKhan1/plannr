@@ -50,7 +50,7 @@ export default function LoginScreen({ navigation }) {
                                     style={[styles.logo, { tintColor: AppColors.primary }]}
                                     resizeMode="contain"
                                 />
-                                <Text style={styles.brandName}>LogExpress</Text>
+                                <Text style={styles.brandName}>Planner</Text>
                             </View>
 
                             <Text style={styles.welcomeTitle}>Welcome back!</Text>

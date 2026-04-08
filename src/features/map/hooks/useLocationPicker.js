@@ -8,7 +8,7 @@ export const useLocationPicker = (navigation, isFromHome = false) => {
     const [isLoading, setIsLoading] = useState(true);
 
     // Global State
-    const setUserLocation = useUserStore((state) => state.setUserLocation);
+    const { syncUserLocation } = useUserStore();
 
     // Refs
     const mapRef = useRef(null);
@@ -24,11 +24,19 @@ export const useLocationPicker = (navigation, isFromHome = false) => {
                 }
 
                 let currentLocation = await Location.getCurrentPositionAsync({});
-                setLocation({
+                const coords = {
                     latitude: currentLocation.coords.latitude,
                     longitude: currentLocation.coords.longitude,
+                };
+
+                // Fetch address for initial location
+                const address = await getAddressFromCoords(coords.latitude, coords.longitude);
+
+                setLocation({
+                    ...coords,
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
+                    address: address,
                 });
             } catch (error) {
                 console.log("Error fetching location", error);
@@ -40,9 +48,27 @@ export const useLocationPicker = (navigation, isFromHome = false) => {
         fetchInitialLocation();
     }, []);
 
-    const handleConfirmLocation = () => {
+    const getAddressFromCoords = async (latitude, longitude) => {
+        try {
+            const [result] = await Location.reverseGeocodeAsync({ latitude, longitude });
+            if (result) {
+                const parts = [
+                    result.name || result.streetNumber,
+                    result.street,
+                    result.city,
+                    result.region,
+                ].filter(Boolean);
+                return parts.join(', ');
+            }
+        } catch (error) {
+            console.log("Reverse geocoding failed", error);
+        }
+        return null;
+    };
+
+    const handleConfirmLocation = async () => {
         if (location) {
-            setUserLocation(location);
+            await syncUserLocation(location);
         }
 
         if (isFromHome) {
@@ -62,6 +88,7 @@ export const useLocationPicker = (navigation, isFromHome = false) => {
                 longitude: details.geometry.location.lng,
                 latitudeDelta: 0.005,
                 longitudeDelta: 0.005,
+                address: data.description, // Store the human-readable address
             };
             setLocation(newRegion);
             mapRef.current?.animateToRegion(newRegion, 1000);
@@ -71,11 +98,14 @@ export const useLocationPicker = (navigation, isFromHome = false) => {
     const handleMyLocation = async () => {
         try {
             let currentLocation = await Location.getCurrentPositionAsync({});
+            const address = await getAddressFromCoords(currentLocation.coords.latitude, currentLocation.coords.longitude);
+
             const newRegion = {
                 latitude: currentLocation.coords.latitude,
                 longitude: currentLocation.coords.longitude,
-                latitudeDelta: 0.0005, // Updated for more zoom
-                longitudeDelta: 0.0005, // Updated for more zoom
+                latitudeDelta: 0.0005,
+                longitudeDelta: 0.0005,
+                address: address,
             };
             setLocation(newRegion);
             mapRef.current?.animateToRegion(newRegion, 1000);
@@ -84,11 +114,13 @@ export const useLocationPicker = (navigation, isFromHome = false) => {
         }
     };
 
-    const handleRegionChangeComplete = (region) => {
+    const handleRegionChangeComplete = async (region) => {
+        const address = await getAddressFromCoords(region.latitude, region.longitude);
         setLocation({
             ...location,
             latitude: region.latitude,
             longitude: region.longitude,
+            address: address, // Update address as map moves
         });
     };
 

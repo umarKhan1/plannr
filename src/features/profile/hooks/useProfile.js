@@ -5,7 +5,7 @@ import { useUserStore } from '../../../core/store/useUserStore';
 
 // ─── Mock Profile Data (swap with API/store later) ────────────────────────────
 const MOCK_PROFILE = {
-    name: 'MD Rafi Islam',
+    name: 'M Omar',
     avatar: 'https://i.pravatar.cc/300?img=33',
     followers: 1089,
     following: 275,
@@ -14,22 +14,22 @@ const MOCK_PROFILE = {
 
 export const useProfile = () => {
     const logout = useUserStore((s) => s.logout);
-    const user   = useUserStore((s) => s.user);
+    const user = useUserStore((s) => s.user);
 
     // ── Local UI state ──────────────────────────────────────────────────────
-    const [avatarUri, setAvatarUri]           = useState(MOCK_PROFILE.avatar);
-    const [pickerVisible, setPickerVisible]   = useState(false);
+    const [avatarUri, setAvatarUri] = useState(MOCK_PROFILE.avatar);
+    const [pickerVisible, setPickerVisible] = useState(false);
 
     // Derived profile — later replace MOCK_PROFILE with real user from store
     const profile = {
-        name:      user?.name ?? MOCK_PROFILE.name,
+        name: user?.name ?? MOCK_PROFILE.name,
         followers: MOCK_PROFILE.followers,
         following: MOCK_PROFILE.following,
-        events:    MOCK_PROFILE.events,
+        events: MOCK_PROFILE.events,
     };
 
     // ── Avatar picker ───────────────────────────────────────────────────────
-    const openPicker = useCallback(() => setPickerVisible(true),  []);
+    const openPicker = useCallback(() => setPickerVisible(true), []);
     const closePicker = useCallback(() => setPickerVisible(false), []);
 
     const pickFromGallery = useCallback(async () => {

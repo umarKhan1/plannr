@@ -1,13 +1,14 @@
 import { useState, useRef } from 'react';
 import { Animated } from 'react-native';
 import { useUserStore } from '../../../core/store/useUserStore';
+import { CATEGORIES } from '../../../core/constants/strings';
 
 export const useCategorySelection = (navigation) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
     // Access global store context to persist selected categories
-    const setUserCategories = useUserStore((state) => state.setUserCategories);
+    const syncUserCategories = useUserStore((state) => state.syncUserCategories);
 
     const showToast = () => {
         Animated.sequence([
@@ -38,12 +39,14 @@ export const useCategorySelection = (navigation) => {
     };
 
     const handleFinish = async () => {
-        // 1. Save to global state (Zustand)
-        // With Zustand persist middleware, this acts as your local cache
-        setUserCategories(selectedCategories);
+        // 1. Map IDs to human-readable names for the database
+        const categoryNames = selectedCategories.map(id => {
+            const category = CATEGORIES.find(cat => cat.id === id);
+            return category ? category.name : id;
+        });
 
-        // 2. Future: This is where you would sync with Supabase
-        // await supabase.from('user_profiles').update({ categories: selectedCategories }).eq('id', user.id);
+        // 2. Save to global state and sync with Supabase
+        await syncUserCategories(categoryNames);
 
         // 3. Navigate home
         navigation.reset({

@@ -41,7 +41,7 @@ export default function SignUpScreen({ navigation }) {
                         <View style={styles.header}>
                             <Text style={styles.title}>Create Your Account</Text>
                             <Text style={styles.subtitle}>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Join our community and start discovering amazing events today.
                             </Text>
                         </View>
                     </FadeInUp>

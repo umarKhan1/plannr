@@ -110,6 +110,73 @@ export function EventCard({ event, onPress, showHeart = true, variant = 'horizon
         );
     }
 
+    if (variant === 'map_overlay') {
+        const hasAttendees = event.attendees && event.attendees.avatars && event.attendees.avatars.length > 0;
+        return (
+            <TouchableOpacity
+                style={styles.mapOverlayContainer}
+                activeOpacity={0.9}
+                onPress={onPress}
+            >
+                <ImageBackground
+                    source={{ uri: event.image }}
+                    style={styles.mapOverlayImage}
+                    contentFit="cover"
+                    imageStyle={{ borderRadius: moderateScale(15) }}
+                >
+                    <TouchableOpacity style={styles.mapHeartButton} onPress={handleLikePress}>
+                        <MaterialCommunityIcons
+                            name={isLiked ? "cards-heart" : "heart-outline"}
+                            size={20}
+                            color={isLiked ? AppColors.primary : "white"}
+                        />
+                    </TouchableOpacity>
+                </ImageBackground>
+
+                <View style={styles.mapOverlayContent}>
+                    <Text style={styles.mapOverlayTitle} numberOfLines={1}>{event.title}</Text>
+                    
+                    <View style={styles.mapOverlayInfoRow}>
+                        <MaterialIcons name="calendar-today" size={14} color={AppColors.primary} />
+                        <Text style={styles.mapOverlayInfoText}>{event.dateRange?.split(',')[0] || "TBD"}</Text>
+                        <MaterialIcons name="location-on" size={14} color={AppColors.primary} style={{ marginLeft: moderateScale(10) }} />
+                        <Text style={styles.mapOverlayInfoText} numberOfLines={1}>{event.location}</Text>
+                    </View>
+
+                    <View style={styles.mapOverlayBottomRow}>
+                        {hasAttendees && (
+                            <View style={styles.attendeesContainer}>
+                                {event.attendees.avatars.slice(0, 3).map((avatar, index) => (
+                                    <Image
+                                        key={index}
+                                        source={{ uri: avatar }}
+                                        style={[
+                                            styles.attendeeAvatar,
+                                            { zIndex: 10 - index, marginLeft: index === 0 ? 0 : -8, width: moderateScale(24), height: moderateScale(24) }
+                                        ]}
+                                        contentFit="cover"
+                                    />
+                                ))}
+                                {event.attendees.count > 0 && (
+                                    <View style={[
+                                        styles.attendeeAvatar,
+                                        styles.attendeeCountPill,
+                                        { zIndex: 0, marginLeft: -8, width: moderateScale(24), height: moderateScale(24) }
+                                    ]}>
+                                        <Text style={[styles.attendeeCountText, { fontSize: moderateScale(8) }]}>+{event.attendees.count}</Text>
+                                    </View>
+                                )}
+                            </View>
+                        )}
+                        <TouchableOpacity style={styles.mapJoinButton} onPress={() => console.log('Join clicked')}>
+                            <Text style={styles.mapJoinButtonText}>JOIN NOW</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
     // 'home' variant used in the main feed
     if (variant === 'home') {
         return (
@@ -392,5 +459,67 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: moderateScale(13),
         fontWeight: '600',
+    },
+    // Map Overlay specific styles
+    mapOverlayContainer: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: moderateScale(20),
+        padding: moderateScale(12),
+        width: moderateScale(320),
+        marginHorizontal: moderateScale(10),
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
+        elevation: 5,
+    },
+    mapOverlayImage: {
+        width: '100%',
+        height: verticalScale(140),
+        borderRadius: moderateScale(15),
+    },
+    mapHeartButton: {
+        position: 'absolute',
+        top: moderateScale(10),
+        right: moderateScale(10),
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        padding: moderateScale(8),
+        borderRadius: moderateScale(10),
+    },
+    mapOverlayContent: {
+        marginTop: verticalScale(10),
+    },
+    mapOverlayTitle: {
+        fontSize: moderateScale(16),
+        fontWeight: 'bold',
+        color: '#1a1a1a',
+    },
+    mapOverlayInfoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: verticalScale(5),
+    },
+    mapOverlayInfoText: {
+        fontSize: moderateScale(12),
+        color: '#666',
+        marginLeft: moderateScale(4),
+        flexShrink: 1,
+    },
+    mapOverlayBottomRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: verticalScale(10),
+    },
+    mapJoinButton: {
+        backgroundColor: '#2D2D2D', // Dark background for JOIN NOW
+        paddingHorizontal: moderateScale(15),
+        paddingVertical: verticalScale(8),
+        borderRadius: moderateScale(8),
+    },
+    mapJoinButtonText: {
+        color: '#FFFFFF',
+        fontSize: moderateScale(12),
+        fontWeight: 'bold',
     }
 });

@@ -58,7 +58,9 @@ const EmptyTicketState = ({ type }) => {
                 {type === 'UPCOMING' ? 'No Upcoming Event' : 'No Past Event'}
             </Text>
             <Text style={styles.subtitle}>
-                Nec interdum magna leo, lectus risus commodo suspendisse. Placerat
+                {type === 'UPCOMING' 
+                    ? "You don't have any upcoming tickets yet. Explore trending events and join the fun!"
+                    : "No past events to show. Attend some events to see your history here!"}
             </Text>
         </View>
     );

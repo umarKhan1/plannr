@@ -9,7 +9,7 @@ export const MOCK_EVENTS = [
         dateRange: 'THU 26 May, 09:00 - FRI 27 May, 10:00',
         location: 'New York',
         price: '$30.00',
-        image: 'https://images.unsplash.com/photo-1540039155732-d684d45cbc26?q=80&w=400&auto=format&fit=crop', // Concert crowd image
+        image: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=400&auto=format&fit=crop', // High-quality concert image
         organizer: {
             name: 'Altanito Salami',
             avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop',
@@ -23,7 +23,7 @@ export const MOCK_EVENTS = [
             ],
             count: 15, // +15 
         },
-        description: "We have a team but still missing a couple of people. Let's play together! We have a team but still missing a couple of people. We have a team but still missing a couple of people",
+        description: "Experience the ultimate rock energy! Join us for an unforgettable night featuring top-tier bands, incredible light shows, and a high-octane atmosphere that will keep you on your feet all night long.",
         locationCoordinates: { latitude: 23.2156, longitude: 72.6369 } // Gandhinagar
     },
     {

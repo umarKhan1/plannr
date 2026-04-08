@@ -4,19 +4,19 @@ export const ONBOARDING_SLIDES = [
     {
         id: '1',
         image: AppAssets.onb1,
-        title: 'The Fastest In\nDelivery Food',
-        description: 'Our job is to filling your tummy with delicious food and fast delivery.',
+        title: 'Discover Local\nEvents Near You',
+        description: 'Explore the best local events, from concerts to workshops, all in one place.',
     },
     {
         id: '2',
         image: AppAssets.onb2,
-        title: 'Easy Tracking\nReal Time',
-        description: 'Track your package in real-time with our advanced tracking system.',
+        title: 'Never Miss\nAn Experience',
+        description: 'Stay updated with your favorite organizers and get notified of new events.',
     },
     {
         id: '3',
         image: AppAssets.onb3,
-        title: 'Safe Delivery\nTo Your Door',
-        description: 'We ensure safe and contactless delivery to your doorstep.',
+        title: 'Your Tickets\nAlways Ready',
+        description: 'Access your event tickets anytime, anywhere, and enjoy a seamless entry experience.',
     },
 ];

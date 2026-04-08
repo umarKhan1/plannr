@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 export default {
     expo: {
-        name: "logexpress",
-        slug: "logexpress",
+        name: "Planner",
+        slug: "planner",
         version: "1.0.0",
         orientation: "portrait",
         icon: "./assets/icon.png",
@@ -20,8 +20,8 @@ export default {
             infoPlist: {
                 NSLocationWhenInUseUsageDescription: "This app needs your location to help you set the delivery or pickup address on the map.",
                 NSLocationAlwaysAndWhenInUseUsageDescription: "This app needs your location to track delivery progress.",
-                NSPhotoLibraryUsageDescription: "Logeexpress needs access to your photo library to send images in chat.",
-                NSCameraUsageDescription: "Logeexpress needs access to your camera to take photos for chat."
+                NSPhotoLibraryUsageDescription: "Planner needs access to your photo library to send images in chat.",
+                NSCameraUsageDescription: "Planner needs access to your camera to take photos for chat."
             },
             config: {
                 googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY
@@ -57,7 +57,7 @@ export default {
             [
                 "expo-image-picker",
                 {
-                    "photosPermission": "Logeexpress needs access to your photo library to send images in chat."
+                    "photosPermission": "Planner needs access to your photo library to send images in chat."
                 }
             ],
             "react-native-bottom-tabs",

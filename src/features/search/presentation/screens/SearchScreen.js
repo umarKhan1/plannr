@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -16,12 +16,14 @@ import { AppColors } from '../../../../shared/theme/colors';
 import { moderateScale, verticalScale } from '../../../../core/utils/responsive';
 import { useSearch } from '../../hooks/useSearch';
 import { EventCard } from '../../../events/presentation/components/EventCard';
+import FilterModal from '../components/FilterModal';
 
 export default function SearchScreen() {
     const navigation = useNavigation();
 
     // Connect to our new state management hook
     const { searchQuery, setSearchQuery, searchResults } = useSearch();
+    const [showFilterModal, setShowFilterModal] = useState(false);
 
     const renderEmptyState = () => (
         <View style={styles.emptyStateContainer}>
@@ -63,7 +65,11 @@ export default function SearchScreen() {
                                 autoFocus={true}
                             />
                         </View>
-                        <TouchableOpacity style={styles.filterButton} activeOpacity={0.7}>
+                        <TouchableOpacity 
+                            style={styles.filterButton} 
+                            activeOpacity={0.7}
+                            onPress={() => setShowFilterModal(true)}
+                        >
                             <Octicons name="sliders" size={20} color="#333" />
                         </TouchableOpacity>
                     </View>
@@ -94,8 +100,16 @@ export default function SearchScreen() {
                         />
                     )}
                 </View>
-
             </KeyboardAvoidingView>
+
+            <FilterModal 
+                isVisible={showFilterModal} 
+                onClose={() => setShowFilterModal(false)}
+                onApply={(filters) => {
+                    console.log('Applied filters:', filters);
+                    // Search logic can be enhanced here to use these filters
+                }}
+            />
         </SafeAreaView>
     );
 }
