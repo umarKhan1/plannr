@@ -35,7 +35,12 @@ Each event features an instant real-time group chat leveraging Supabase Channels
 
 ![Chat](assets/screenshots/chat.png)
 
-### 7. User Profiles
+### 7. Ticket Management
+Keep track of your upcoming and past events with a clean, summarized ticket history.
+
+![Tickets](assets/screenshots/tickets.png)
+
+### 8. User Profiles
 Personalized profiles that showcase user interests, event history, and social connections.
 
 ![Profile](assets/screenshots/profilesviews.png)
